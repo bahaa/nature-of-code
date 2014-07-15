@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>The Nature of Code!</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="lib/class.js"></script>
+    <script src="lib/underscore-min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/paper-full.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/math.min.js"></script>
+    <script src="lib/random.js"></script>
+    <script src="lib/box2dweb.js"></script>
+
+    <script src="js/utils.js"></script>
+    <script src="js/draw.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>The Nature of Code!</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <form class="" role="form">
+                    <div class="form-group">
+                        <label for="paper-script">Script</label>
+                        <select id="paper-script" class="form-control">
+                            <option>None</option>
+                            <option value="playground.js">Test Playground</option>
+                            <option value="walker.js">Random Walker</option>
+                            <option value="forces.js">Forces</option>
+                            <option value="attraction.js">Attraction</option>
+                            <option value="spiral.js">Spiral</option>
+                            <option value="clock.js">Clock (Radians)</option>
+                            <option value="particle.js">Particle Smoke</option>
+                            <option value="box.js">Box2D</option>
+                            <option value="arrive.js">Vehicle Arrive</option>
+                            <option value="separation.js">Separation</option>
+                            <option value="flock.js">Flocking</option>
+                            <option value="elemca.js">Elementary CA</option>
+                            <option value="gol.js">Game of Life</option>
+                            <option value="cantor.js">Cantor Lines</option>
+                        </select>
+                    </div>
+                </form>
+                <button id="refresh" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> Refresh</button>
+                <button id="pause" class="btn btn-primary"><span class="glyphicon glyphicon-pause"></span> </button>
+                <a id="export" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-down"></span> Export</a>
+            </div>
+
+            <div class="col-sm-9">
+                <canvas id="main-canvas" width="800" height="600" keepalive="true" data-paper-keepalive="true"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
