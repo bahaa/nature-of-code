@@ -11,3 +11,8 @@
     border: 1px solid;
     margin: 5px;
 }
+
+#log-form {
+    margin-top: 15px;
+    display: none;
+}

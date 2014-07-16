@@ -1,3 +1,8 @@
 function map(value, start1, stop1, start2, stop2) {
     return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
 }
+
+function log(msg) {
+    $('#log-form').show();
+    $('#log').val($('#log').val() + msg + '\n');
+}

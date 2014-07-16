@@ -61,6 +61,8 @@ function refresh() {
             scope.remove();
             scope = null;
         }
+
+        window.location.hash = "";
         return;
     }
     

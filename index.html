@@ -36,7 +36,7 @@
                         <label for="paper-script">Script</label>
                         <select id="paper-script" class="form-control">
                             <option>None</option>
-                            <option value="playground.js">Test Playground</option>
+                            <!-- <option value="playground.js">Test Playground</option> -->
                             <option value="walker.js">Random Walker</option>
                             <option value="forces.js">Forces</option>
                             <option value="attraction.js">Attraction</option>
@@ -59,7 +59,13 @@
                     <button id="pause" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pause"></span> </button>
                     <a id="export" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-down"></span> Export</a>
                 </form>                
-                                
+
+                <form id="log-form">
+                    <div class="form-group">
+                        <label for="log">Messages</label>
+                        <textarea id="log" class="form-control" readonly rows="20"></textarea>
+                    </div>
+                </form>
             </div>
 
             <div class="col-sm-9">
