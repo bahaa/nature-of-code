@@ -4,6 +4,8 @@ $(function() {
     $('#paper-script').change(refresh);
     $('#refresh').click(refresh);
 
+    init();
+
     $('#pause').click(function() {
         if (!scope) {
             return;
@@ -39,6 +41,17 @@ function timestamp() {
     return parts[1] + '_' + parts[2];
 }
 
+function init() {
+    var script = window.location.hash;
+    if (!script || script.length == 0) {
+        return;
+    }
+
+    script = script.substring(1) + ".js";
+    $('#paper-script').val(script);
+    refresh();
+}
+
 function refresh() {
     $('#pause').removeClass('active');
     var selected = $('#paper-script').val();
@@ -55,6 +68,7 @@ function refresh() {
     $('#desc').text(desc ? desc : '');
 
     var script = 'scripts/' + selected;
+    window.location.hash = '#' + selected.slice(0, -3);
 
     $.ajax({
         url: script,
