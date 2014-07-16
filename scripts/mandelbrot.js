@@ -44,7 +44,7 @@ function createColorizer() {
         // that runs between the two points we defined earlier:
         fillColor: {
             gradient: {
-                stops: ['yellow', 'red', 'blue']
+                stops: ['green', 'yellow', 'red', 'blue']
             },
             origin: view.center - new Point(128, 0),
             destination: view.center + new Point(128, 0)
@@ -74,6 +74,6 @@ path.remove();
 raster.position = view.center;
 
 var zoom = 16000.0;
-var center = math.complex(-0.71, -0.25);
+var center = math.complex(-0.73, -0.25);
 
 fractal(raster, zoom, center);
