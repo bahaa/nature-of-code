@@ -50,6 +50,9 @@ function refresh() {
         }
         return;
     }
+    
+    var desc = $('#paper-script :selected').attr('data-desc');
+    $('#desc').text(desc ? desc : '');
 
     var script = 'scripts/' + selected;
 
