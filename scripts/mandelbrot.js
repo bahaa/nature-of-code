@@ -18,24 +18,6 @@ function mandelbrot(c, iter) {
     return complexAbs(z);
 }
 
-function fractal(raster, zoom, center) {
-    var colorizer = createColorizer();
-
-    for (var x = 0; x < raster.width; x++) {
-        for (var y = 0; y < raster.height; y++) {
-            var c = toComplex(
-                x - raster.width /2,
-                y - raster.height / 2,
-                zoom,
-                center
-            );
-
-            var mag = mandelbrot(c, 50.0);
-            raster.setPixel(x, y, colorizer(mag));
-        }
-    }
-}
-
 function createColorizer() {
     var palettePath = new Path.Rectangle({
         position: view.center,
@@ -57,16 +39,28 @@ function createColorizer() {
 
     var limit = palette.width - 1;
     return function(mag) {
-        debugger;
         var pos = Math.max(Math.min(300 * mag, limit), 1);
         return palette.getPixel([pos, 5]);
     }
 }
 
+function colFractal(x, raster, zoom, center, colorizer) {
+    for (var y = 0; y < raster.height; y++) {
+        var c = toComplex(
+                x - raster.width /2,
+                y - raster.height / 2,
+            zoom,
+            center
+        );
+
+        var mag = mandelbrot(c, 50.0);
+        raster.setPixel(x, y, colorizer(mag));
+    }
+}
+
 var path = new Path.Rectangle({
     position:view.center,
-    size:view.size,
-    fillColor: 'red'
+    size:view.size
 });
 
 var raster = path.rasterize(view.resolution / 2);
@@ -74,6 +68,17 @@ path.remove();
 raster.position = view.center;
 
 var zoom = 16000.0;
-var center = math.complex(-0.73, -0.25);
+var center = math.complex(-0.71, -0.25);
+var colorizer = createColorizer();
 
-fractal(raster, zoom, center);
+var x = 0;
+
+function onFrame() {
+    if (x < view.size.width) {
+        colFractal(x, raster, zoom, center, colorizer);
+        x++;
+    }
+}
+
+
+
