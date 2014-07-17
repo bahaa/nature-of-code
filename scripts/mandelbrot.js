@@ -1,3 +1,5 @@
+// Implementation from http://www.pheelicks.com/2013/11/intro-to-images-in-go-fractals/
+
 
 function toComplex(x, y, zoom, center) {
     return math.add(center, math.complex(x / zoom, y / zoom));
