@@ -4,7 +4,7 @@ var GENE_COUNT = 600;
 var GENOME_MUTATION_RATE = 0.01;
 var POPULATION_MUTATION_RATE = 0.7;
 
-var madeItAudio = new Audio('data/madeit.wav');
+var madeItAudio = window.Audio ? new Audio('data/madeit.wav') : null;
 
 var Rocket = Class.extend({
 
@@ -106,7 +106,9 @@ var Rocket = Class.extend({
             this.destroy();
             this.fitness = 1.0;
             this.madeIt = true;
-            madeItAudio.play();
+            if (madeItAudio) {
+                madeItAudio.play();
+            }
         }
     },
 
