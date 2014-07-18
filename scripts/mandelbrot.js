@@ -1,7 +1,9 @@
 // Implementation from http://www.pheelicks.com/2013/11/intro-to-images-in-go-fractals/
 
+pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+
 var ITERATIONS = 50;
-var ZOOM = 300.0;
+var ZOOM = 300.0 * pixelRatio;
 var CENTER = new Complex(-0.75, 0);
 
 function mandelbrot(c, iter) {
@@ -30,7 +32,7 @@ function colFractal(x, raster, zoom, center, colorizer) {
 function createColorizer(stops) {
     var palettePath = new Path.Rectangle({
         position: view.center,
-        size: [256, 2],
+        size: [512 / pixelRatio, 2],
         // Fill the path with a gradient of three color stops
         // that runs between the two points we defined earlier:
         fillColor: {
@@ -67,7 +69,7 @@ var path = new Path.Rectangle({
     size: view.size
 });
 
-var raster = path.rasterize(view.resolution / 2);
+var raster = path.rasterize();
 path.remove();
 raster.position = view.center;
 
@@ -88,8 +90,8 @@ var colorizer = createColorizer(['yellow', 'red', 'fuchsia', 'black']);
 var beginTime = new Date();
 
 var x = 0;
-var executionsPerFrame = 10;
-var width = view.size.width;
+var executionsPerFrame = 10 / pixelRatio;
+var width = imageData.width;
 
 function onFrame() {
     if (x < width) {
