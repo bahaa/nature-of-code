@@ -1,5 +1,9 @@
 // Implementation from http://www.pheelicks.com/2013/11/intro-to-images-in-go-fractals/
 
+var ITERATIONS = 50;
+var ZOOM = 300.0;
+var CENTER = new Complex(-0.75, 0);
+
 function mandelbrot(c, iter) {
     var z = new Complex(0.0, 0.0);
     for (var i = 0; i < iter; i++) {
@@ -9,6 +13,18 @@ function mandelbrot(c, iter) {
         }
     }
     return z.abs();
+}
+
+function colFractal(x, raster, zoom, center, colorizer) {
+    for (var y = 0; y < raster.height; y++) {
+        var c = center.add(new Complex(
+                (x - (raster.width / 2)) / zoom,
+                (y - (raster.height / 2)) / zoom
+        ));
+
+        var mag = mandelbrot(c, ITERATIONS);
+        raster.setPixel(x, y, colorizer(mag));
+    }
 }
 
 function createColorizer(stops) {
@@ -46,18 +62,6 @@ function createColorizer(stops) {
     }
 }
 
-function colFractal(x, raster, zoom, center, colorizer) {
-    for (var y = 0; y < raster.height; y++) {
-        var c = center.add(new Complex(
-            (x - (raster.width / 2)) / zoom,
-            (y - (raster.height / 2)) / zoom
-        ));
-
-        var mag = mandelbrot(c, 50.0);
-        setPixel(x, y, colorizer(mag));
-    }
-}
-
 var path = new Path.Rectangle({
     position: view.center,
     size: view.size
@@ -68,22 +72,17 @@ path.remove();
 raster.position = view.center;
 
 var imageData = raster.getImageData();
-var width = imageData.width;
-var height = imageData.height;
 
-
-function setPixel(x, y, components) {
-    var index = x + y * width;
+imageData.setPixel = function (x, y, components) {
+    var index = x + y * this.width;
     index *= 4.0;
 
-    imageData.data[index + 0] = components[0];
-    imageData.data[index + 1] = components[1];
-    imageData.data[index + 2] = components[2];
-    imageData.data[index + 3] = 255;
+    this.data[index + 0] = components[0];
+    this.data[index + 1] = components[1];
+    this.data[index + 2] = components[2];
+    this.data[index + 3] = 255;
 }
 
-var zoom = 300.0;
-var center = new Complex(-0.7, 0);
 var colorizer = createColorizer(['yellow', 'red', 'fuchsia', 'black']);
 
 var beginTime = new Date();
@@ -98,7 +97,7 @@ function onFrame() {
             if (x + i >= width) {
                 break;
             }
-            colFractal(x + i, imageData, zoom, center, colorizer);
+            colFractal(x + i, imageData, ZOOM, CENTER, colorizer);
         }
         x += executionsPerFrame;
 
