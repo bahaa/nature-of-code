@@ -59,7 +59,16 @@
                     
                     <button id="refresh" type="button" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> Refresh</button>
                     <button id="pause" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pause"></span> </button>
-                    <a id="export" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-down"></span> Export</a>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-circle-arrow-down"></span> Export <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a id="export-svg"><span class="glyphicon glyphicon-picture"></span> SVG</a></li>
+                            <li><a id="export-image"><span class="glyphicon glyphicon-camera"></span> PNG</a></li>
+                        </ul>
+                    </div>
                 </form>                
 
                 <form id="log-form">
