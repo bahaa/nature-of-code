@@ -22,7 +22,7 @@ $(function() {
         $(this).blur();
     });
 
-    $('#export').click(function() {
+    $('#export-svg').click(function() {
         if (!scope) {
             return;
         }
@@ -32,6 +32,15 @@ $(function() {
             type: 'image/svg+xml'
         }));
         this.download = 'Export_' + timestamp() + '.svg';
+    });
+
+    $('#export-image').click(function() {
+        if (!scope) {
+            return;
+        }
+
+        this.href = $('#main-canvas').get(0).toDataURL();
+        this.download = 'Export_' + timestamp();
     });
 });
 
