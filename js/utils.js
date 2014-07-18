@@ -6,3 +6,5 @@ function log(msg) {
     $('#log-form').show();
     $('#log').val($('#log').val() + msg + '\n');
 }
+
+
