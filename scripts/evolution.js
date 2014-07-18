@@ -104,7 +104,7 @@ var Rocket = Class.extend({
     checkTarget:function() {
         if (this.target.contains(this.location)) {
             this.destroy();
-            this.fitness = .999999999;
+            this.fitness = 1.0;
             this.madeIt = true;
             madeItAudio.play();
         }
