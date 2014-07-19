@@ -52,7 +52,7 @@ function createColorizer(stops) {
 
     var limit = imageData.width - 1;
     return function (mag) {
-        var pos = Math.max(Math.min(300 * mag, limit), 1);
+        var pos = Math.max(Math.min(256 * mag, limit), 1);
         var components = [];
         var index = Math.floor(pos) * 4;
 
@@ -112,5 +112,35 @@ function onFrame() {
     }
 }
 
-
+function onKeyDown(event) {
+    var changed = true;
+    
+    switch(event.key) {
+        case '+':
+            ZOOM *= 2;
+            break;
+        case '-':
+            ZOOM /= 2;
+            break;
+        case 'up':
+            CENTER.im += 0.1 / (Math.ceil(ZOOM / 1000));
+            break;
+        case 'down':
+            CENTER.im -= 0.1 / (Math.ceil(ZOOM / 1000));
+            break;
+        case 'right':
+            CENTER.rl -= 0.1 / (Math.ceil(ZOOM / 1000));
+            break;
+        case 'left':
+            CENTER.rl += 0.1 / (Math.ceil(ZOOM / 1000));
+            break;    
+        default:
+            changed = false;
+    }
+    
+    if (changed) {
+        x = 0;
+        beginTime = new Date();
+    }
+}
 
